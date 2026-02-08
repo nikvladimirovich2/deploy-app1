@@ -13,10 +13,10 @@ load_dotenv()
 COMPOSE_FILE = 'docker-compose.yaml'
 MIGRATION_FILE = './scripts/migrations.sql'
 DB_HOST = os.getenv("DB_HOST", "localhost")
-DB_PORT = 5432
-DB_USER = os.getenv("DB_USER", "app1_user")
-DB_PASSWORD = os.getenv("POSTGRES_PASS", "app1_pass")
-DB_NAME = os.getenv("DB_NAME", "app1_db")
+DB_PORT = os.getenv("DB_PORT", 5432)
+DB_USER = os.getenv("DB_USER", "user")
+DB_PASSWORD = os.getenv("POSTGRES_PASS", "password")
+DB_NAME = os.getenv("DB_NAME", "db_app")
 APP_HEALTH_URL = 'http://localhost:8080/health'
 
 def run_command(cmd):
