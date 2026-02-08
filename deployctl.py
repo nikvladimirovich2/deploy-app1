@@ -18,6 +18,7 @@ DB_USER = os.getenv("DB_USER", "app1_user")
 DB_PASSWORD = os.getenv("POSTGRES_PASS", "app1_pass")
 DB_NAME = os.getenv("DB_NAME", "app1_db")
 APP_HEALTH_URL = 'http://localhost:8080/health'
+TAG = os.getenv("TAG", "28")
 
 def run_command(cmd):
     try:
@@ -67,8 +68,8 @@ def up():
     return {"status": "success"}
 
 def rollback():
-    prev_tag = os.environ.get('PREV_TAG', 'previous')
-    run_command(f"sed -i 's/faoapp_flask:28/faoapp_flask:{prev_tag}/g' {COMPOSE_FILE}")
+    prev_tag = os.environ.get('TAG', '28')
+    run_command(f"sed -i 's/faoapp_flask:{TAG}/faoapp_flask:{prev_tag}/g' {COMPOSE_FILE}")
     output = run_command(f"docker compose -f {COMPOSE_FILE} up -d")
     return {"status": "success" if "error" not in output else "failed", "details": output}
 
