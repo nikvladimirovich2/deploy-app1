@@ -25,10 +25,10 @@ The following Python packages are required:
 The utility loads its configuration from a `.env` file or directly from environment variables.
 
 ### Required / Optional Variables
-- DB_HOST=localhost
-- DB_USER=app1_user
-- POSTGRES_PASS=app1_pass
-- DB_NAME=app1_db
+- DB_HOST=
+- DB_USER=
+- POSTGRES_PASS=
+- DB_NAME=
 
 Replace the default values with your own configuration before running the application.
 
@@ -59,7 +59,7 @@ Example output
 
 Restarts the Docker Compose stack to restore the previous application state.
 
-To perform a rollback, update the APP_TAG (or another relevant tag variable) in the .env file to the required value, then run:
+To perform a rollback, update the APP_TAG in the .env file to the required value, then run:
    ```
    python3 deployctl.py rollback
    ```
