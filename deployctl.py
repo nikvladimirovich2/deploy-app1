@@ -85,7 +85,7 @@ if __name__ == "__main__":
     elif args.command == 'rollback':
         result = rollback()
     else:
-        print("Invalid command")
+        print("Invalid command\nUsage: deployctl.py [up|rollback]")
         sys.exit(1)
 
     print(json.dumps(result))
