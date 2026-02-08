@@ -7,9 +7,9 @@ Before using `deployctl.py`, ensure the following components are installed on th
 
 - Python 3.9+
 - Docker
-- Docker Compose (v2)
-- PostgreSQL client libraries
 - curl
+
+For installation. please, use official documentation for any components.
 
 ### Python dependencies
 
