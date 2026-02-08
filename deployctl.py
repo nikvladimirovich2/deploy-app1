@@ -54,7 +54,7 @@ def up():
     if "error" in output:
         return {"status": "failed", "details": output}
     else:
-        print(output)
+        print("Docker compose started successfully")
 
     if not wait_for_db():
         return {"status": "failed", "details": "DB not ready"}
