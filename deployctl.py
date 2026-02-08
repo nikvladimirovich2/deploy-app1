@@ -4,6 +4,7 @@ import time
 import json
 import os
 import psycopg2
+import sys
 from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 from dotenv import load_dotenv
 
