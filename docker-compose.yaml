@@ -17,7 +17,7 @@ services:
       retries: 5
 
   app:
-    image: arklan/faoapp_flask:28
+    image: arklan/faoapp_flask:${APP_TAG:-28}
     container_name: app1
     environment:
       DB_HOST: postgres
