@@ -75,6 +75,10 @@ def rollback():
     output = run_command(f"docker compose -f {COMPOSE_FILE} up -d")
     return {"status": "App rolled back successfully" if "error" not in output else "failed", "details": output}
 
+def down():
+    output = run_command(f"docker compose -f {COMPOSE_FILE} down")
+    return {"status": "Application down successfully" if "error" not in output else "failed", "details": output}
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     subparsers = parser.add_subparsers(dest='command')
@@ -88,8 +92,7 @@ if __name__ == "__main__":
     elif args.command == 'rollback':
         result = rollback()
     elif args.command == 'down':
-        output = run_command(f"docker compose -f {COMPOSE_FILE} down")
-        result = {"status": "Application down successfully" if "error" not in output else "failed", "details": output}
+        result = down()
     else:
         print("Invalid command\nUsage: deployctl.py [up|rollback|down]")
         sys.exit(1)
