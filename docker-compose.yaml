@@ -1,0 +1,23 @@
+services:
+  postgres:
+    image: postgres:${POSTGRES_VERSION:-18.3}
+    container_name: postgres
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASS}
+    volumes:
+      - ./scripts:/scripts:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  app:
+    image: arklan/faoapp_flask:28
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8080:80"
