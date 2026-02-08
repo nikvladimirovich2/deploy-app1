@@ -17,7 +17,7 @@ services:
   app:
     image: arklan/faoapp_flask:28
     depends_on:
-      db:
+      postgres:
         condition: service_healthy
     ports:
       - "8080:80"
