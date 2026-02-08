@@ -11,13 +11,6 @@ Before using `deployctl.py`, ensure the following components are installed on th
 
 For installation. please, use official documentation for any components.
 
-### Python dependencies
-
-The following Python packages are required:
-
-- psycopg2
-- python-dotenv
-
 ---
 
 ## Environment Variables
