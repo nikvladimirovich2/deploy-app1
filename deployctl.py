@@ -18,7 +18,6 @@ DB_USER = os.getenv("DB_USER", "app1_user")
 DB_PASSWORD = os.getenv("POSTGRES_PASS", "app1_pass")
 DB_NAME = os.getenv("DB_NAME", "app1_db")
 APP_HEALTH_URL = 'http://localhost:8080/health'
-TAG = os.getenv("TAG", "28")
 
 def run_command(cmd):
     try:
@@ -47,7 +46,6 @@ def apply_migration():
     conn.close()
 
 def check_app_health():
-    # Simulate curl
     response = run_command("curl -f " + APP_HEALTH_URL)
     return "error" not in response
 
@@ -55,15 +53,21 @@ def up():
     output = run_command(f"docker compose -f {COMPOSE_FILE} up -d")
     if "error" in output:
         return {"status": "failed", "details": output}
+    else:
+        print(output)
 
     if not wait_for_db():
         return {"status": "failed", "details": "DB not ready"}
+    else:
+        print("DB is ready")
 
     apply_migration()
 
     time.sleep(5)  # Wait for app
     if not check_app_health():
         return {"status": "failed", "details": "App healthcheck failed"}
+    else:
+        print("App is healthy")
 
     return {"status": "success"}
 
