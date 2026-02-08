@@ -11,7 +11,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 COMPOSE_FILE = 'docker-compose.yaml'
-MIGRATION_FILE = 'migrations.sql'
+MIGRATION_FILE = './scripts/migrations.sql'
 DB_HOST = os.getenv("DB_HOST", "localhost")
 DB_PORT = 5432
 DB_USER = os.getenv("DB_USER", "app1_user")
