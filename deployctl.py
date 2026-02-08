@@ -63,17 +63,17 @@ def up():
 
     apply_migration()
 
-    time.sleep(5)  # Wait for app
+    time.sleep(5)
     if not check_app_health():
         return {"status": "failed", "details": "App healthcheck failed"}
     else:
         print("App is healthy")
 
-    return {"status": "success"}
+    return {"status": "Application deployed successfully"}
 
 def rollback():
     output = run_command(f"docker compose -f {COMPOSE_FILE} up -d")
-    return {"status": "success" if "error" not in output else "failed", "details": output}
+    return {"status": "App rolled back successfully" if "error" not in output else "failed", "details": output}
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -87,8 +87,11 @@ if __name__ == "__main__":
         result = up()
     elif args.command == 'rollback':
         result = rollback()
+    elif args.command == 'down':
+        output = run_command(f"docker compose -f {COMPOSE_FILE} down")
+        result = {"status": "Application down successfully" if "error" not in output else "failed", "details": output}
     else:
-        print("Invalid command\nUsage: deployctl.py [up|rollback]")
+        print("Invalid command\nUsage: deployctl.py [up|rollback|down]")
         sys.exit(1)
 
     print(json.dumps(result))
