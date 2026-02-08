@@ -53,24 +53,15 @@ def up():
     output = run_command(f"docker compose -f {COMPOSE_FILE} up -d")
     if "error" in output:
         return {"status": "failed", "details": output}
-    # Uncomment below lines if you need debug
-    # else:
-    #     print("Docker compose started successfully")
 
     if not wait_for_db():
         return {"status": "failed", "details": "DB not ready"}
-    # Uncomment below lines if you need debug
-    # else:
-    #     print("DB is ready")
 
     apply_migration()
 
     time.sleep(5)
     if not check_app_health():
         return {"status": "failed", "details": "App healthcheck failed"}
-    # Uncomment below lines if you need debug
-    # else:
-    #     print("App is healthy")
 
     return {"status": "Application deployed successfully"}
 
