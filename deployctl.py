@@ -69,7 +69,7 @@ def up():
 def rollback():
     prev_tag = os.environ.get('PREV_TAG', 'previous')
     run_command(f"sed -i 's/faoapp_flask:28/faoapp_flask:{prev_tag}/g' {COMPOSE_FILE}")
-    output = run_command(f"docker compose -f {COMPOSE_FILE} restart")
+    output = run_command(f"docker compose -f {COMPOSE_FILE} up -d")
     return {"status": "success" if "error" not in output else "failed", "details": output}
 
 if __name__ == "__main__":
