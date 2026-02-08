@@ -84,6 +84,7 @@ if __name__ == "__main__":
     subparsers = parser.add_subparsers(dest='command')
     subparsers.add_parser('up')
     subparsers.add_parser('rollback')
+    subparsers.add_parser('down')
 
     args = parser.parse_args()
 
